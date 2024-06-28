@@ -1,7 +1,7 @@
 #Daily Diet
 
-- [ ] It should be able to create a new user
-- [ ] It should be able identify the user between the requests
+- [x] It should be able to create a new user
+- [ ] It should be able to identify the user between the requests
 - [ ] It should be able to register a meal, with these informations bellow:
     *Meals should be bonded an user.*
 
