@@ -4,18 +4,18 @@ import { MealsRepository } from '@/repositories/meals-repository'
 
 import { MealNotFoundError } from './errors/meal-not-found-error'
 
-interface CreateMealUseCaseRequest {
+interface UpdateMealUseCaseRequest {
   name: string
   description: string
   isWithinDiet: boolean
   userId: string
   mealId: string
 }
-interface CreateMealUseCaseResponse {
+interface UpdateMealUseCaseResponse {
   meal: Meal
 }
 
-export class CreateMealUseCase {
+export class UpdateMealUseCase {
   constructor(private mealsRepository: MealsRepository) {}
 
   async execute({
@@ -23,7 +23,7 @@ export class CreateMealUseCase {
     description,
     isWithinDiet,
     mealId,
-  }: CreateMealUseCaseRequest): Promise<CreateMealUseCaseResponse> {
+  }: UpdateMealUseCaseRequest): Promise<UpdateMealUseCaseResponse> {
     const meal = await this.mealsRepository.findById(mealId)
 
     if (!meal) {
