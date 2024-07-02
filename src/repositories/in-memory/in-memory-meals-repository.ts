@@ -17,6 +17,12 @@ export class InMemoryMealsRepository implements MealsRepository {
     return meal
   }
 
+  async getManyByUserId(userId: string) {
+    const meals = await this.items.filter((meal) => meal.user_id === userId)
+
+    return meals
+  }
+
   async create(data: Prisma.MealUncheckedCreateInput) {
     const meal = {
       id: randomUUID(),
