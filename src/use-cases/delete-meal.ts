@@ -4,27 +4,21 @@ import { MealsRepository } from '@/repositories/meals-repository'
 
 import { ResourceNotFoundError } from './errors/meal-not-found-error'
 
-interface UpdateMealUseCaseRequest {
-  name: string
-  description: string
-  isWithinDiet: boolean
+interface DeleteMealUseCaseRequest {
   userId: string
   mealId: string
 }
-interface UpdateMealUseCaseResponse {
+interface DeleteMealUseCaseResponse {
   meal: Meal
 }
 
-export class UpdateMealUseCase {
+export class DeleteMealUseCase {
   constructor(private mealsRepository: MealsRepository) {}
 
   async execute({
-    name,
-    description,
-    isWithinDiet,
     mealId,
     userId,
-  }: UpdateMealUseCaseRequest): Promise<UpdateMealUseCaseResponse> {
+  }: DeleteMealUseCaseRequest): Promise<DeleteMealUseCaseResponse> {
     const meal = await this.mealsRepository.findById(mealId)
 
     if (!meal) {
@@ -35,11 +29,7 @@ export class UpdateMealUseCase {
       throw new ResourceNotFoundError()
     }
 
-    meal.name = name
-    meal.description = description
-    meal.is_within_diet = isWithinDiet
-
-    await this.mealsRepository.save(meal)
+    await this.mealsRepository.delete(mealId)
 
     return {
       meal,

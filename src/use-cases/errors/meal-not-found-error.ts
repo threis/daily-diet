@@ -1,5 +1,5 @@
-export class MealNotFoundError extends Error {
+export class ResourceNotFoundError extends Error {
   constructor() {
-    super('Meal not found')
+    super('Resource not found')
   }
 }

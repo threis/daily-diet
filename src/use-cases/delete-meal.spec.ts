@@ -1,18 +1,18 @@
 import { InMemoryMealsRepository } from '@/repositories/in-memory/in-memory-meals-repository'
 
+import { DeleteMealUseCase } from './delete-meal'
 import { ResourceNotFoundError } from './errors/meal-not-found-error'
-import { UpdateMealUseCase } from './update-meal'
 
 let mealsRepository: InMemoryMealsRepository
-let sut: UpdateMealUseCase
+let sut: DeleteMealUseCase
 
-describe('Update Meal Use Case', () => {
+describe('Delete Meal Use Case', () => {
   beforeEach(async () => {
     mealsRepository = new InMemoryMealsRepository()
-    sut = new UpdateMealUseCase(mealsRepository)
+    sut = new DeleteMealUseCase(mealsRepository)
   })
 
-  it('should be able to update a meal', async () => {
+  it('should be able to delete a meal', async () => {
     const meal = await mealsRepository.create({
       id: 'meal-id',
       name: 'meal-created',
@@ -22,20 +22,15 @@ describe('Update Meal Use Case', () => {
       is_within_diet: true,
     })
 
-    const { meal: mealUpdated } = await sut.execute({
-      name: 'meal-updated',
-      description: 'meal-description-updated',
-      userId: meal.user_id,
-      isWithinDiet: false,
+    await sut.execute({
       mealId: meal.id,
+      userId: meal.user_id,
     })
 
-    expect(mealUpdated.name).toEqual('meal-updated')
-    expect(mealUpdated.description).toEqual('meal-description-updated')
-    expect(mealUpdated.is_within_diet).toBe(false)
+    expect(mealsRepository.items).toHaveLength(0)
   })
 
-  it('should not be able to update a meal with non-existent user', async () => {
+  it('should not be able to delete a meal with non-existent user', async () => {
     const meal = await mealsRepository.create({
       id: 'meal-id',
       name: 'meal-created',
@@ -47,11 +42,8 @@ describe('Update Meal Use Case', () => {
 
     await expect(() =>
       sut.execute({
-        name: 'meal-updated',
-        description: 'meal-description-updated',
-        userId: 'non-existent-user-id',
-        isWithinDiet: false,
         mealId: meal.id,
+        userId: 'non-existent-user-id',
       }),
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
