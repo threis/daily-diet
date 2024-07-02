@@ -6,6 +6,7 @@ import { ResourceNotFoundError } from './errors/meal-not-found-error'
 
 interface GetMealUseCaseRequest {
   id: string
+  userId: string
 }
 interface GetMealUseCaseResponse {
   meal: Meal
@@ -16,10 +17,15 @@ export class GetMealUseCase {
 
   async execute({
     id,
+    userId,
   }: GetMealUseCaseRequest): Promise<GetMealUseCaseResponse> {
     const meal = await this.mealsRepository.findById(id)
 
     if (!meal) {
+      throw new ResourceNotFoundError()
+    }
+
+    if (meal.user_id !== userId) {
       throw new ResourceNotFoundError()
     }
 

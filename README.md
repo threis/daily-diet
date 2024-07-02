@@ -11,10 +11,10 @@
 - [x] It should be able to edit a meal
 - [x] It should be able to delete a meal
 - [x] It should be able to list all meals of an user
-- [ ] It should be able to view an unique meal
+- [x] It should be able to view an unique meal
 - [ ] It should be able to get metrics of an user
     - [ ] Total amount register meals
     - [ ] Total amount meals within the diet
     - [ ] Total amouint of non-dietary meals
     - [ ] Best meals within the diet
-- [ ] The user only can view, edit and delete just meals created by themselves.
+- [x] The user only can view, edit and delete just meals created by themselves.
