@@ -16,5 +16,5 @@
     - [x] Total amount register meals
     - [x] Total amount meals within the diet
     - [x] Total amount of non-dietary meals
-    - [ ] Best meals within the diet
+    - [x] Best sequence of meals within the diet
 - [x] The user only can view, edit and delete just meals created by themselves.

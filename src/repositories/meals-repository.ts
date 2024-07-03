@@ -9,4 +9,5 @@ export interface MealsRepository {
   countTotalAmount(userId: string): Promise<number>
   countTotalAmountWithinDiet(userId: string): Promise<number>
   countTotalAmountNonDietary(userId: string): Promise<number>
+  countBestSequenceWithinDiet(userId: string): Promise<number>
 }

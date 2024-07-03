@@ -77,4 +77,27 @@ export class InMemoryMealsRepository implements MealsRepository {
 
     return totalAmount
   }
+
+  async countBestSequenceWithinDiet(userId: string) {
+    let sequenceCounter = 0
+    let bestSequence = 0
+
+    const meals = await this.items
+      .filter((meal) => meal.user_id === userId)
+      .sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
+
+    meals.forEach((meal) => {
+      if (meal.is_within_diet) {
+        sequenceCounter += 1
+      } else {
+        sequenceCounter = 0
+      }
+
+      if (sequenceCounter >= bestSequence) {
+        bestSequence = sequenceCounter
+      }
+    })
+
+    return bestSequence
+  }
 }
