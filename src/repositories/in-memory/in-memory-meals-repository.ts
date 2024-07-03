@@ -61,4 +61,12 @@ export class InMemoryMealsRepository implements MealsRepository {
 
     return totalAmount
   }
+
+  async countTotalAmountWithinDiet(userId: string) {
+    const totalAmount = await this.items.filter(
+      (meal) => meal.user_id === userId && meal.is_within_diet,
+    ).length
+
+    return totalAmount
+  }
 }

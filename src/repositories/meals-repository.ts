@@ -7,4 +7,5 @@ export interface MealsRepository {
   delete(mealId: string): Promise<void>
   getManyByUserId(userId: string): Promise<Meal[]>
   countTotalAmount(userId: string): Promise<number>
+  countTotalAmountWithinDiet(userId: string): Promise<number>
 }
