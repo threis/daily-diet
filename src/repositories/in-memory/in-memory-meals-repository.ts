@@ -53,4 +53,12 @@ export class InMemoryMealsRepository implements MealsRepository {
       this.items.splice(index, 1)
     }
   }
+
+  async countTotalAmount(userId: string) {
+    const totalAmount = await this.items.filter(
+      (meal) => meal.user_id === userId,
+    ).length
+
+    return totalAmount
+  }
 }
