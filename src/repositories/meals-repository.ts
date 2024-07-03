@@ -8,4 +8,5 @@ export interface MealsRepository {
   getManyByUserId(userId: string): Promise<Meal[]>
   countTotalAmount(userId: string): Promise<number>
   countTotalAmountWithinDiet(userId: string): Promise<number>
+  countTotalAmountNonDietary(userId: string): Promise<number>
 }

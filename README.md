@@ -15,6 +15,6 @@
 - [ ] It should be able to get metrics of an user
     - [x] Total amount register meals
     - [x] Total amount meals within the diet
-    - [ ] Total amouint of non-dietary meals
+    - [x] Total amount of non-dietary meals
     - [ ] Best meals within the diet
 - [x] The user only can view, edit and delete just meals created by themselves.
