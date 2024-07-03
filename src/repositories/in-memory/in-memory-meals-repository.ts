@@ -2,6 +2,8 @@ import { randomUUID } from 'node:crypto'
 
 import { Meal, Prisma } from '@prisma/client'
 
+import { getBestSequenceMealsWithinDiet } from '@/utils/getBestSequenceMealsWithinDiet'
+
 import { MealsRepository } from '../meals-repository'
 
 export class InMemoryMealsRepository implements MealsRepository {
@@ -79,24 +81,9 @@ export class InMemoryMealsRepository implements MealsRepository {
   }
 
   async countBestSequenceWithinDiet(userId: string) {
-    let sequenceCounter = 0
-    let bestSequence = 0
+    const meals = await this.items.filter((meal) => meal.user_id === userId)
 
-    const meals = await this.items
-      .filter((meal) => meal.user_id === userId)
-      .sort((a, b) => (a.created_at > b.created_at ? 1 : -1))
-
-    meals.forEach((meal) => {
-      if (meal.is_within_diet) {
-        sequenceCounter += 1
-      } else {
-        sequenceCounter = 0
-      }
-
-      if (sequenceCounter >= bestSequence) {
-        bestSequence = sequenceCounter
-      }
-    })
+    const bestSequence = getBestSequenceMealsWithinDiet(meals)
 
     return bestSequence
   }
