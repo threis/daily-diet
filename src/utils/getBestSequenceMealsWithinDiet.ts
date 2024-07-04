@@ -1,6 +1,6 @@
 import { Meal } from '@prisma/client'
 
-export function getBestSequenceMealsWithinDiet(meals: Meal[]) {
+export function getBestSequenceMealsWithinDiet(meals: Meal[]): number {
   let sequenceCounter = 0
   let bestSequence = 0
 
