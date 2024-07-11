@@ -4,13 +4,13 @@ import { z } from 'zod'
 import { makeCreateMealsUseCase } from '@/use-cases/factories/make-create-meal-use-case'
 
 export async function createMeal(request: FastifyRequest, reply: FastifyReply) {
-  const registerBodySchema = z.object({
+  const createMealBodySchema = z.object({
     name: z.string(),
     description: z.string(),
     isWithinDiet: z.boolean(),
   })
 
-  const { name, description, isWithinDiet } = registerBodySchema.parse(
+  const { name, description, isWithinDiet } = createMealBodySchema.parse(
     request.body,
   )
 
