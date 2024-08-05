@@ -1,4 +1,4 @@
-#Daily Diet
+# Daily Diet
 
 - [x] It should be able to create a new user
 - [x] It should be able to identify the user between the requests
